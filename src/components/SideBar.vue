@@ -82,18 +82,22 @@ const elements: Element[] = reactive([
   {
     type: "Text",
     element: "p",
+    icon: null,
   },
   {
     type: "Heading",
     element: "h4",
+    icon: null,
   },
   {
     type: "Fields",
     element: "input",
+    icon: null,
   },
   {
     type: "Button",
     element: "button",
+    icon: null,
   },
 ]);
 
@@ -154,6 +158,7 @@ const shapes: Element[] = reactive([
   {
     type: "Shape",
     element: "div",
+    icon: null,
   },
 ]);
 
@@ -161,7 +166,7 @@ const startDrag = (e: DragEvent, arg: Element) => {
   const data: Element = {
     type: arg.type,
     element: arg.element,
-    icon: arg.icon ? arg.icon : null,
+    icon: arg.icon,
     isNew: true,
   };
 
