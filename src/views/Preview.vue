@@ -63,7 +63,7 @@ const goBack = (): void => {
 
 watch(showPopup, () => {
   if (popup.value && showPopup.value) {
-    const element: String = popup.value.element;
+    const element: string = popup.value.element;
     popup.value.name;
     if (preview.value) {
       preview.value.innerHTML = element;
