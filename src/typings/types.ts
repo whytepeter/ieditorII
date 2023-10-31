@@ -1,6 +1,6 @@
 export interface Element {
     type: string;
     element: string ;
-    icon?: string | null;
+    icon: string | null;
     isNew?:boolean
   }

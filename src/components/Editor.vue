@@ -154,6 +154,7 @@ const startDrag = (e: Event & any): void => {
     type: e.target.getAttribute("type"),
     isNew: false,
     element: "",
+    icon: null,
   };
 
   e.dataTransfer.setData("element", JSON.stringify(data));
