@@ -38,7 +38,13 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 
-const buttons = reactive([
+interface Button {
+  title: string;
+  icon: string;
+  action: Function;
+}
+
+const buttons: Button[] = reactive([
   {
     title: "Preview",
     icon: "pi pi-desktop",
@@ -62,14 +68,14 @@ const popupName: WritableComputedRef<string> = computed({
   get() {
     return popup.value ? popup.value.name : "Untitled";
   },
-  set(val) {
+  set(val: string) {
     popup.value.name = val;
     localStorage.setItem("saved", JSON.stringify(popup.value));
   },
 });
 
-function handleSave() {
-  let element = document.getElementById("container");
+function handleSave(): void {
+  const element: HTMLElement | null = document.getElementById("container");
 
   const newElement = {
     name: popupName.value,

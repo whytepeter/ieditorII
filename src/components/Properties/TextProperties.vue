@@ -103,7 +103,15 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, computed, reactive, ref, watch, Ref } from "vue";
+import {
+  onMounted,
+  computed,
+  reactive,
+  ref,
+  watch,
+  Ref,
+  ComputedRef,
+} from "vue";
 
 interface Font {
   label: string;
@@ -127,7 +135,7 @@ const properties = reactive({
   color: <string>"",
 });
 
-const alignments = reactive([
+const alignments: Record<string, string>[] = reactive([
   {
     title: "left",
     icon: "pi pi-align-left",
@@ -165,7 +173,9 @@ const fontFamilies: Font[] = reactive([
   },
 ]);
 
-const watchElement = computed(() => props.element);
+const watchElement: ComputedRef<HTMLElement | null> = computed(
+  () => props.element
+);
 
 watch(watchElement, () => {
   if (props.element) {
@@ -191,7 +201,7 @@ const setProperty = () => {
   properties.lineHeight = parseInt(data.value.style.lineHeight, 10);
 };
 
-const updateFontSize = (type: string) => {
+const updateFontSize = (type: string): void => {
   if (!data.value) return;
   if (type == "add") {
     properties.fontSize++;
@@ -204,14 +214,14 @@ const updateFontSize = (type: string) => {
   data.value.style.fontSize = properties.fontSize + "px";
 };
 
-const updateFormat = (property: any, arg: string) => {
+const updateFormat = (property: any, arg: string): void => {
   if (!data.value) return;
   let value = (properties as any)[property];
   value = value == arg ? "" : arg;
   data.value.style[property] = value;
 };
 
-const updateProperty = (property: any, arg: string) => {
+const updateProperty = (property: any, arg: string): void => {
   if (!data.value) return;
   let value = (properties as any)[property];
   value = arg;

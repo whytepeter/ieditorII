@@ -53,17 +53,17 @@ const popup: ComputedRef<Record<string, string>> = computed(() => {
   return saved ? JSON.parse(saved) : null;
 });
 
-const togglePopup = (arg: boolean) => {
+const togglePopup = (arg: boolean): void => {
   showPopup.value = arg;
 };
 
-const goBack = () => {
+const goBack = (): void => {
   router.go(-1);
 };
 
 watch(showPopup, () => {
   if (popup.value && showPopup.value) {
-    const element = popup.value.element;
+    const element: String = popup.value.element;
     popup.value.name;
     if (preview.value) {
       preview.value.innerHTML = element;

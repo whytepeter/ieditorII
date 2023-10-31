@@ -23,7 +23,15 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, computed, reactive, ref, watch, Ref } from "vue";
+import {
+  onMounted,
+  computed,
+  reactive,
+  ref,
+  watch,
+  Ref,
+  ComputedRef,
+} from "vue";
 
 const props = defineProps<{
   element: HTMLElement | null;
@@ -36,7 +44,9 @@ const properties: Record<string, number | null> = reactive({
   height: null,
 });
 
-const watchElement = computed(() => props.element);
+const watchElement: ComputedRef<HTMLElement | null> = computed(
+  () => props.element
+);
 
 watch(watchElement, () => {
   if (props.element) {
@@ -48,7 +58,7 @@ onMounted(() => {
   setProperty();
 });
 
-const setProperty = () => {
+const setProperty = (): void => {
   if (!props.element) return;
   data.value = props.element;
 

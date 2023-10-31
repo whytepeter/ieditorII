@@ -74,7 +74,7 @@ const props = defineProps<{
   element: HTMLElement | null;
 }>();
 
-const toggle = reactive({
+const toggle: Record<string, boolean> = reactive({
   border: false,
   padding: false,
 });
@@ -101,16 +101,9 @@ onMounted(() => {
   setProperty();
 });
 
-const setProperty = () => {
+const setProperty = (): void => {
   if (!props.element) return;
   data.value = props.element;
-
-  // const propertiesKeys = Object.keys(properties)
-  // propertiesKeys.forEach((key) => {
-  //   if(key !== 'borderColor'){
-  //     data.value &&  data.value[key] = value
-  //   }
-  // });
 
   properties.borderColor = data.value.style.borderColor;
   properties.borderWidth = parseInt(data.value.style.borderWidth, 10);
@@ -119,13 +112,13 @@ const setProperty = () => {
   properties.paddingLeft = parseInt(data.value.style.borderWidth, 10);
 };
 
-const udpateBorder = (type: any) => {
+const udpateBorder = (type: any): void => {
   if (!data.value) return;
   const value = (properties as any)[type];
   data.value.style[type] = type == "borderColor" ? value : value + "px";
 };
 
-const updatePadding = (type: "paddingX" | "paddingY", e: any) => {
+const updatePadding = (type: "paddingX" | "paddingY", e: any): void => {
   if (!data.value) return;
   const value = e.target.value;
 

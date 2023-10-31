@@ -36,7 +36,7 @@ const defaultTemplates = ref<string>(
   `<div id="layout" class="relative overflow-hidden mx-auto w-[450px] h-[450px] selected" style="background: rgb(243, 143, 112); border-radius: 1000px;"><div draggable="true" type="Shape" style="left: 14.3403px; top: 13.3646px; background: rgb(243, 144, 111); width: 420px; height: 420px; position: absolute; max-width: 98%; max-height: 98%; border-radius: 10000px; border-color: rgb(255, 255, 255); border-width: 3px; z-index: 1;" class="selected"></div><i class="pi pi-star-fill" draggable="true" type="icon" style="left: 205.007px; top: 34.3698px; font-size: 30px; color: rgb(210, 124, 96); position: absolute; z-index: 1;"></i><i class="pi pi-star-fill" draggable="true" type="icon" style="left: 147.007px; top: 47.3646px; font-size: 26px; color: rgb(210, 124, 96); position: absolute; z-index: 1;"></i><i class="pi pi-star-fill" draggable="true" type="icon" style="left: 264.007px; top: 49.3646px; font-size: 26px; color: rgb(210, 124, 96); position: absolute; z-index: 1;"></i><h4 draggable="true" type="Heading" style="left: 75.0069px; top: 88.3646px; font-size: 25px; font-weight: bold; color: rgb(255, 255, 255); max-width: 98%; line-height: 1.15; position: absolute; text-align: center; width: 300px; max-height: 98%; font-family: Arial, sans-serif; z-index: 1;" class="">All the text and elements in this popup should be editable and draggable</h4><input placeholder="E-mail" draggable="true" type="Fields" style="left: 54.0069px; top: 198.365px; padding: 10px 20px; color: rgb(21, 0, 55); outline: none; border-radius: 12px; font-size: 21px; position: absolute; width: 350px; max-width: 98%; max-height: 98%; z-index: 1; font-family: Arial, sans-serif;" class=""><button draggable="true" type="Button" style="left: 59.0069px; top: 271.365px; padding: 10px 20px; color: rgb(255, 255, 255); background: rgb(84, 84, 84); border-radius: 11px; font-size: 22px; position: absolute; text-align: center; font-weight: bold; width: 332px; max-width: 98%; max-height: 98%; font-family: Arial, sans-serif; z-index: 1;" class="">SIGN UP NOW</button><p draggable="true" type="Text" style="left: 111.007px; top: 339.365px; font-size: 14px; color: rgb(255, 255, 255); max-width: 100%; position: absolute; font-family: Arial, sans-serif; z-index: 1;" class="">No credit card required. No Suprises</p></div>`
 );
 
-const onDrop = (e: DragEvent) => {
+const onDrop = (e: DragEvent): void => {
   const layout = document.getElementById("layout");
 
   const res: Element =
@@ -45,7 +45,7 @@ const onDrop = (e: DragEvent) => {
 
   const data: HTMLElement = isNew
     ? document.createElement(element)
-    : draggingElement.value; //The element that's being dragged in properties
+    : draggingElement.value!; //The element that's being dragged in properties
 
   // Position the element relative the mouse position on the layout
   const layoutRect = layout && layout.getBoundingClientRect();
@@ -76,7 +76,7 @@ const onDrop = (e: DragEvent) => {
   }
 };
 
-const addDefaultStyles = (el: HTMLElement, type: string) => {
+const addDefaultStyles = (el: HTMLElement, type: string): void => {
   const defaultStyles: Record<string, any> = {
     Button: {
       padding: "10px 20px",
@@ -139,7 +139,7 @@ const addDefaultStyles = (el: HTMLElement, type: string) => {
   }
 };
 
-const selectElement = (e: Event & any) => {
+const selectElement = (e: Event & any): void => {
   if (activeElement.value) {
     activeElement.value.classList.remove("selected");
   }
@@ -148,7 +148,7 @@ const selectElement = (e: Event & any) => {
   activeElement.value && activeElement.value.classList.add("selected");
 };
 
-const startDrag = (e: Event & any) => {
+const startDrag = (e: Event & any): void => {
   draggingElement.value = e.target;
   const data: Element = {
     type: e.target.getAttribute("type"),
@@ -159,14 +159,14 @@ const startDrag = (e: Event & any) => {
   e.dataTransfer.setData("element", JSON.stringify(data));
 };
 
-const trackmouse = (e: Event & any) => {
+const trackmouse = (e: Event & any): void => {
   if (e.target.id !== "layout") {
     leftCorrection.value = e.offsetX;
     topCorrection.value = e.offsetY;
   }
 };
 
-const setTemplate = () => {
+const setTemplate = (): void => {
   const saved = localStorage.getItem("saved");
   const template = saved ? JSON.parse(saved) : null;
 
@@ -177,7 +177,7 @@ const setTemplate = () => {
   addStartDragEvent();
 };
 
-const addStartDragEvent = () => {
+const addStartDragEvent = (): void => {
   const layout = document.getElementById("layout");
 
   //Add the necessary events to the layout when setting the default templates from local storage
