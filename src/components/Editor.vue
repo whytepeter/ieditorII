@@ -160,7 +160,9 @@ const setTemplate = () => {
   const template = saved ? JSON.parse(saved) : null;
 
   if (!container.value) return;
-  container.value.innerHTML = template.element || defaultTemplates.value;
+  container.value.innerHTML = template
+    ? template.element
+    : defaultTemplates.value;
   addStartDragEvent();
 };
 
