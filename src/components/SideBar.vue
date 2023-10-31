@@ -72,16 +72,11 @@
 
 <script setup lang="ts">
 import { ref, reactive, Ref } from "vue";
+import { Element } from "@/typings/types";
 
 const showSideBar = ref(true);
 const activeBlock: Ref<string> = ref("Elements");
 const blocks = ref(["Elements", "Shapes", "Icons"]);
-
-interface Element {
-  type: string;
-  element: string;
-  icon?: string;
-}
 
 const elements: Element[] = reactive([
   {
@@ -163,7 +158,7 @@ const shapes: Element[] = reactive([
 ]);
 
 const startDrag = (e: DragEvent, arg: Element) => {
-  const data = {
+  const data: Element = {
     type: arg.type,
     element: arg.element,
     icon: arg.icon ? arg.icon : null,
