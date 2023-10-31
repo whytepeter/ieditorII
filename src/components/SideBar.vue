@@ -48,8 +48,8 @@
         class="grid grid-cols-5 md:grid-cols-4 gap-4 overflow-y-auto pb-4 pt-2"
       >
         <i
-          v-for="item in icons"
-          :key="item.icon"
+          v-for="(item, i) in icons"
+          :key="i"
           :draggable="true"
           @dragstart="startDrag($event, item)"
           :class="['pi', item.icon]"
